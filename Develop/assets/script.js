@@ -23,7 +23,7 @@ function generatePassword() {
   //Notify user of confirmLength choice
   window.alert("You have chosen " + confirmLength + " characters.");
 
-  //Component Choices
+  //Component passwordCharacters
   var confirmNumber = window.confirm("Would you like numbers in your password? Click OK if yes.");
   var confirmAlphaLow = window.confirm("Would you like lowercase letters in your password? Click OK if yes.");
   var confirmAlphaUpp = window.confirm("Would you like uppercase letters in your password? Click OK if yes.");
@@ -37,18 +37,59 @@ function generatePassword() {
     }
   
   //Create chosenCharacter array
-  var passwordCharacters = []
+  if (confirmSpecial && confirmNumber && confirmAlphaUpp && confirmAlphaLow) {
 
-  if (confirmNumber === true) {
-      chosenCharacters = passwordCharacters.concat[number]
-  }
-  if (confirmAlphaLow === true) {
-      chosenCharacters = passwordCharacters.concat[alphaLow]
-  }
+        passwordCharacters = special.concat(number, alphaLow, alphaUpp);
+    }
+    // Else if for 3 positive options
+    else if (confirmSpecial && confirmNumber && confirmAlphaUpp) {
+        passwordCharacters = special.concat(number, alphaUpp);
+    }
+    else if (confirmSpecial && confirmNumber && confirmAlphaLow) {
+      passwordCharacters = special.concat(number, alphaLow);
+    }
+    else if (confirmSpecial && confirmAlphaLow && confirmAlphaUpp) {
+       passwordCharacters = special.concat(alphaLow, alphaUpp);
+    }
+    else if (confirmNumber && confirmAlphaLow && confirmAlphaUpp) {
+    passwordCharacters = number.concat(alphaLow, alphaUpp);
+    }
+    // Else if for 2 positive options 
+    else if (confirmSpecial && confirmNumber) {
+        passwordCharacters = special.concat(number);
 
-  console.log(chosenCharacters);
-  console.log(passwordCharacters);
-}
+    } else if (confirmSpecial && confirmAlphaLow) {
+        passwordCharacters = special.concat(alphaLow);
+
+    } else if (confirmSpecial && confirmAlphaUpp) {
+        passwordCharacters = special.concat(alphaUpp);
+    }
+    else if (confirmAlphaLow && confirmNumber) {
+        passwordCharacters = alphaLow.concat(number);
+
+    } else if (confirmAlphaLow && confirmAlphaUpp) {
+         passwordCharacters = alphaLow.concat(alphaUpp);
+
+    } else if (confirmNumber && confirmAlphaUpp) {
+        passwordCharacters = number.concat(alphaUpp);
+    }
+    // Else if for 1 positive option
+    else if (confirmSpecial) {
+        passwordCharacters = special;
+    }
+    else if (confirmNumber) {
+        passwordCharacters = number;
+    }
+    else if (confirmAlphaLow) {
+        passwordCharacters = alphaLow;
+};
+
+  var randomPassword = ""
+  for (var i = 0; i < confirmLength; i++) {
+      randomPassword = randomPassword + passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)];
+  }
+  return randomPassword;
+};
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
