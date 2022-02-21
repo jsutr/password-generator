@@ -13,12 +13,27 @@ var confirmSpecial;
 
 // Generation
 function generatePassword() {
+  //Length prompt
   var confirmLength = window.prompt("How many characters would you like in your password? Please choose a number between 8 and 128.");
   while(confirmLength <=7 || confirmLength >= 129) {
     window.alert("Your desired character length cannot be utilized. Please choose a number between 8 and 128.");
     var confirmLength = window.prompt("How many characters would you like in your password? Please choose a number between 8 and 128.");
   }
-  window.alert("You have chosen " + confirmLength + " characters.")
+  //Notify user of confirmLength choice
+  window.alert("You have chosen " + confirmLength + " characters.");
+
+  //Component Choices
+  var confirmNumber = window.confirm("Would you like numbers in your password? Click OK if yes.");
+  var confirmAlphaLow = window.confirm("Would you like lowercase letters in your password? Click OK if yes.");
+  var confirmAlphaUpp = window.confirm("Would you like uppercase letters in your password? Click OK if yes.");
+  var confirmSpecial = window.confirm("Would you like special characters in your password? Click OK if yes.");
+  while (confirmNumber === false && confirmAlphaLow === false && confirmAlphaUpp === false && confirmSpecial === false) {
+      window.alert("Please click OK for at least one parameter.");
+      var confirmNumber = window.confirm("Would you like numbers in your password? Click OK if yes.");
+      var confirmAlphaLow = window.confirm("Would you like lowercase letters in your password? Click OK if yes.");
+      var confirmAlphaUpp = window.confirm("Would you like uppercase letters in your password? Click OK if yes.");
+      var confirmSpecial = window.confirm("Would you like special characters in your password? Click OK if yes.");
+    }
 }
 
 // Get references to the #generate element
